@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+version="3.6"
+name="libselinux"
+depends=""
+description="lib"
+source="https://github.com/SELinuxProject/selinux/releases/download/3.6/${name}-${version}.tar.gz"
+groups="app.arch"
+setup()
+{
+
+      echo ""
+}
+build()
+{
+	cd $SOURCEDIR
+	make swigify
+	make all
+	make PYTHON=/usr/bin/python3 pywrap
+}
+package()
+{
+	cd $SOURCEDIR
+	make DESTDIR="$DESTDIR" SBINDIR=/usr/bin SHLIBDIR=/usr/lib install
+	make DESTDIR="$DESTDIR" PYTHON=/usr/bin/python3 SBINDIR=/usr/bin SHLIBDIR=/usr/lib install-pywrap
+}
+
+
