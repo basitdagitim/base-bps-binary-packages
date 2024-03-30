@@ -30,7 +30,7 @@ package()
 	
 	cp -prfv usr  ${DESTDIR}/
 	find ${DESTDIR}/ -iname "*" -exec unxz {} \;
-	
+	rm -rf ${DESTDIR}/usr/lib
 }
 
 
