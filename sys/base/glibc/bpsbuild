@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-version="2.39"
+version="2.38"
 name="glibc"
 depends=""
+dependsbuilds="make,m4,gawk,bison,elfutils"
 description="temel kütüphane"
 source="https://ftp.gnu.org/gnu/libc/${name}-${version}.tar.gz"
 
@@ -39,22 +40,23 @@ setup()
     	../${name}-${version}/configure ${opts[@]} \
         --host=x86_64-pc-linux-gnu \
         --libdir=/usr/lib64 \
-        --libexecdir=/usr/lib64
+        --libexecdir=/usr/lib64/glibc
    
 	
 }
 build()
 {
-    make -j5 #-C $DESTDIR all
+    make #-C $DESTDIR all
 
 }
 package()
 {
 	#cd $SOURCEDIR
 	# create symlink lib64 (gentoo compability)
-    	mkdir -p ${DESTDIR}/usr/lib64
-	cd $DESTDIR
-	ln -s /usr/lib64 /usr/lib
+	mkdir -p ${DESTDIR}/usr
+	cd $DESTDIR/usr
+	ln -s lib64 lib
+
 	cd $BUILDDIR
 	
     make install DESTDIR=$DESTDIR 
@@ -81,15 +83,11 @@ package()
     done
     # fix ldd shebang
     sed -i "s|#!/bin/bash|#!/bin/sh|g" ${DESTDIR}/usr/bin/ldd
-   
-   cd ${DESTDIR}/usr/lib64/
-   mkdir -p x86_64-linux-gnu
-   cd x86_64-linux-gnu
-     while read -rd '' file; do
-       ln -s $file $(basename "$file")
-    done< <(find "../"  -maxdepth 1 -type f -iname "*" -print0)
-     
     
+    cd ${DESTDIR}/usr/lib64/
+	mkdir -p x86_64-linux-gnu
+	cd x86_64-linux-gnu
+	 while read -rd '' file; do
+	   ln -s $file $(basename "$file")
+	done< <(find "../"  -maxdepth 1 -type f -iname "*" -print0)
 }
-
-
