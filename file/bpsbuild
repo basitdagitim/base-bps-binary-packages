@@ -12,14 +12,12 @@ setup(){
         --enable-static
         --enable-elf
         --enable-elf-core
-        --disable-zlib
-        --disable-xzlib
-        --disable-bzlib
-        --disable-libseccomp
     )
-    
-    cd $SOURCEDIR
-    ./configure ${opts[@]}
+    ../${name}-${version}/configure ${opts[@]} \
+	$(use_opt zlib --enable-zlib --disable-zlib) \
+	$(use_opt lzma --enable-xzlib --disable-xzlib) \
+	$(use_opt bzip2 --enable-bzlib --disable-bzlib) \
+	$(use_opt seccomp --enable-libseccomp --disable-libseccomp)
 }
 
 build(){

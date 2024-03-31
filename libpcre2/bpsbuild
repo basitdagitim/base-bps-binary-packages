@@ -8,17 +8,14 @@ group="dev.libs"
 
 setup()
 {
-     cd $SOURCEDIR
-     ./configure --prefix=/usr \
-		--libdir=/usr/lib \
-		--enable-shared \
-		--enable-static \
-		--enable-pcre2-16 \
-		--enable-pcre2-32 \
-		--enable-jit \
-		--enable-pcre2grep-libz \
-		--enable-pcre2grep-libbz2 \
-		--enable-pcre2test-libreadline 
+     ../${name}-${version}/configure --prefix=/usr \
+    	--libdir=/lib64 \
+	    --enable-shared \
+	    --enable-static \
+        --enable-pcre2-16 \
+        --enable-pcre2-32 \
+        --enable-jit \
+        --enable-pcre2test-libreadline 
 }
 build()
 {

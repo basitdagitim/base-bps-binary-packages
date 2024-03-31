@@ -19,7 +19,7 @@ build()
 package()
 {
 	cd $SOURCEDIR
-	make DESTDIR=$DESTDIR SHLIBDIR=/usr/lib install
+	make install DESTDIR=$DESTDIR
 }
 
 
