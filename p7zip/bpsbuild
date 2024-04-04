@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+name="p7zip"
+version="17.05"
+url="https://github.com/jinfeihan57/p7zip"
+description="Command-line file archiver with high compression ratio"
+source="https://github.com/p7zip-project/p7zip/archive/refs/tags/v${version}.tar.gz"
+depends="gcc"
+group="app.arch"
+setup()
+{
+cd $SOURCEDIR
+}
+build(){
+    make 7z 7zr 7za $jobs
+}
+
+package(){
+    make install \
+        DEST_DIR="${DESTDIR}" \
+        DEST_HOME=/usr
+    mv ${DESTDIR}/usr/lib{,64}
+    sed -i "s/lib/lib64/g" ${DESTDIR}/usr/bin/*
+}
+
