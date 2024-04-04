@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-version="2.12.1"
+version="2.12.6"
 name="libxml2"
 depends="glibc,acl,openssl"
 description="shell ve network copy"
@@ -10,8 +10,8 @@ setup()
 	cd $SOURCEDIR
 	autoreconf -fvi
 	cd $BUILDDIR
-	$SOURCEDIR/configure --prefix=/ \
-	  --libdir=/lib \
+	$SOURCEDIR/configure --prefix=/usr \
+	  --libdir=/lib64 \
 	  --enable-shared \
 	
 }
