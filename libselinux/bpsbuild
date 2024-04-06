@@ -7,13 +7,14 @@ source="https://github.com/SELinuxProject/selinux/releases/download/3.6/${name}-
 groups="app.arch"
 setup()
 {
-
       echo ""
 }
 build()
 {
+	cp -prvf $PACKAGEDIR/lfs64.patch /tmp/bps/build/
 	cd $SOURCEDIR
-	make 
+	patch -Np1 -i ../lfs64.patch 
+	make FTS_LDLIBS="-lfts"
 }
 package()
 {
