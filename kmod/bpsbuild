@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 name="kmod"
-version="31"
+version="32"
 description="library and tools for managing linux kernel modules"
 source="https://mirrors.edge.kernel.org/pub/linux/utils/kernel/kmod/kmod-$version.tar.xz"
 depends="zlib,xz-utils"
@@ -12,11 +12,11 @@ export PATH=$HOME:$PATH
 setup(){
     touch libkmod/docs/gtk-doc.make
     $SOURCEDIR/configure --prefix=/usr \
-        --libdir=/lib64/ \
-        --bindir=/sbin
-   # remove xsltproc dependency
-   rm -f man/Makefile
-   echo -e "all:\ninstall:" > man/Makefile
+        --libdir=/usr/lib64/ \
+        --bindir=/bin \
+        --with-rootlibdir=/lib \
+		--with-zlib \
+		--with-openssl
 }
 
 build(){
@@ -25,9 +25,14 @@ build(){
 
 package(){
     make install DESTDIR=$DESTDIR
+    echo "Dizin :"
+    pwd
     mkdir -p ${DESTDIR}/sbin
-    for tool in {ins,ls,rm,dep}mod mod{probe,info}; do
-        ln -s kmod "${DESTDIR}/sbin/$tool"
-  done
+    for i in lsmod rmmod insmod modinfo modprobe depmod; do
+		ln -sf ../bin/kmod "$DESTDIR"/sbin/$i
+	done
+	for i in lsmod modinfo; do
+		ln -s kmod "$DESTDIR"/bin/$i
+	done
 }
 
