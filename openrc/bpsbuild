@@ -20,8 +20,9 @@ setup(){
         -Dzsh-completions=true \
         -Dbash-completions=true \
         -Dpam=true \
-        -Dpkgconfig=true
-#                -Dpam=true \
+        -Dpkgconfig=true \
+        -Dselinux=disabled
+#       -Dpam=true \
 }
 
 build(){
