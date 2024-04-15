@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 version="2.12.6"
-name="libxml2"
+name="xlibxml2-debian"
 depends="glibc,acl,openssl"
 description="shell ve network copy"
 source="https://github.com/GNOME/libxml2/archive/refs/tags/v${version}.tar.gz"
