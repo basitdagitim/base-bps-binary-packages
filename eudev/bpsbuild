@@ -12,21 +12,16 @@ setup()
 	cp ${dizin}/${paket}/eudev.init-top /tmp/bps/build/
 
 	../${name}-${version}/configure --prefix=/usr \
-		--bindir=/sbin          \
-		--sbindir=/sbin         \
-		--libdir=/lib64      \
-		--disable-manpages       \
-		--disable-static \
+        --sysconfdir=/etc \
+        --exec-prefix=/ \
+        --bindir=/bin \
+        --with-rootprefix=/ \
+        --libdir=/usr/lib64/ \
+        --with-rootrundir=/run \
+		--with-rootlibexecdir=/usr/lib64/udev \
+		--enable-split-usr \
 		--disable-selinux \
-		--enable-blkid \
-		--enable-modules \
-		--enable-kmod \
-		--sysconfdir=/etc \
-		--exec-prefix=/ \
-		--with-rootprefix=/ \
-		--with-rootrundir=/run \
-		--with-rootlibexecdir=/lib64/udev \
-		--enable-split-usr 
+		--enable-kmod
 
 
 
