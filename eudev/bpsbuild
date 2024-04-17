@@ -49,8 +49,9 @@ package()
     	ln -s ../sbin/udevadm udevadm
     	ln -s ../sbin/udevd udevd
     	mkdir -p  ${DESTDIR}/usr/lib64/pkgconfig/
-    	cd ${DESTDIR}/lib64/pkgconfig/
-    	ln -sv libudev.pc "$DESTDIR/usr/lib64/pkgconfig/libudev.pc"
+    	cd ${DESTDIR}/usr/lib64/pkgconfig/
+    	ln -s ../../../lib64/pkgconfig/libudev.pc libudev.pc
+    	#ln -sv libudev.pc "$DESTDIR/usr/lib64/pkgconfig/libudev.pc"
 }
 
 
