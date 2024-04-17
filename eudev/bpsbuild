@@ -47,7 +47,10 @@ package()
     	mkdir -p bin
     	cd bin
     	ln -s ../sbin/udevadm udevadm
-    	ln -s ../sbin/udevd udevd 	
+    	ln -s ../sbin/udevd udevd
+    	mkdir -p  ${DESTDIR}/usr/lib64/pkgconfig/
+    	cd ${DESTDIR}/usr/lib64/pkgconfig/
+    	ln -s ${DESTDIR}/lib64/pkgconfig/libudev.pc libudev.pc
 }
 
 
