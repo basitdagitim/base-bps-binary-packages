@@ -29,6 +29,10 @@ package()
 	cd $BUILDDIR
 	cp -prfv lib  ${DESTDIR}/
 	cp -prfv usr  ${DESTDIR}/
+	
+	mkdir $DESTDIR/usr/include
+	cd $DESTDIR/usr/src/linux-headers-6.7.9-amd64/arch/x86/include/generated/uapi
+	ln -s asm/ $DESTDIR/usr/include/asm
 
 }
 
