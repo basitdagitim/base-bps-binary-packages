@@ -70,12 +70,17 @@ mount --bind /run /hedef/run
 mount --bind /tmp /hedef/tmp
 chroot /hedef /bin/busybox --install -s /bin
 
+#**********servisler ekleniyor*************
 chroot /hedef /etc/init.d/agettyinstall
+chroot /hedef rc-update add loadkeys default
+chroot /hedef rc-update add hostname default
+chroot /hedef rc-update add udhcpc default
+cp /hedef/etc/skel/.bashrc /hedef/root/
+cp /hedef/etc/skel/.profile /hedef/root/
 rm /hedef/etc/init.d/agettyinstall
 
-
+#initrd oluşturuluyor.
 chroot /hedef /usr/sbin/update-initramfs -u -k $(uname -r)
-
 chroot /hedef grub-install --removable --boot-directory=/boot /dev/sda --target=i386-pc
 mkdir -p /hedef/boot/grub
 bid=$(blkid /dev/sda2|cut -d' ' -f2|cut -c 7-42)
