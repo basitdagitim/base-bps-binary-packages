@@ -29,6 +29,12 @@ package()
 	cd $BUILDDIR
 
 	cp -prfv usr  ${DESTDIR}/
+	mkdir -p $DESTDIR/usr/include
+	mkdir -p $DESTDIR/usr/include/x86_64-linux-gnu
+	mkdir -p $DESTDIR/usr/include/x86_64-linux-gnu/asm
+	cd $DESTDIR/usr/include
+	
+	ln -s x86_64-linux-gnu/asm asm
 
 	
 }
