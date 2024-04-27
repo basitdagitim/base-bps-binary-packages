@@ -31,20 +31,25 @@ initsetup()
 		if [ ${filetype} == "bz2" ]; then tar -xvf ${dowloadfile}; fi
 		if [ ${filetype} == "tar" ]; then tar -xvf ${dowloadfile}; fi
 		if [ ${filetype} == "xz" ]; then tar -xvf ${dowloadfile}; fi
-		if [ "${filetype}" == "gz" ]; then echo "*****dosya gz ile sıkıştırılmış**"; tar -xvf ${dowloadfile}; fi
+		if [ "${filetype}" == "gz" ]; 
+			then echo "*****dosya gz ile sıkıştırılmış**"; 
+			mkdir -p tmpdir; 
+			tar -xvf ${dowloadfile} -C tmpdir; 
+		fi
 		if [ "${filetype}" == "???" ]; then echo "****dosya zip ile sıkıştırılmış****"; unzip  ${dowloadfile}; fi
 		rm ${dowloadfile}
 		#*********************************************************************************************************
 		director=$(find ./* -maxdepth 0 -type d)
 		if [ "${director}" != "./${name}-${version}" ]; 
 		then 
-		
 		mv $director ${name}-${version}; 
 		fi
 	fi
+
 	mkdir -p build-${name}-${version}
 	mkdir -p rootfs-${name}-${version}
 	cp ${dizin}/${paket}/bpsbuild $(realpath ${target})/tmp/bps/build/bpsbuild
+	
 	
 	if [ -f "${dizin}/${paket}/postinstall" ]; then
 		cp ${dizin}/${paket}/postinstall $(realpath ${target})/tmp/bps/build/postinstall
