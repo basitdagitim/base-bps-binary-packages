@@ -118,10 +118,8 @@ BUILDDIR=$target/tmp/bps/build/build-${name}-${version}
 
 
 # fonksiyonlar aşağıdaki sırayla çalışacaktır.
-echo "******************** preinitsetup ******************"; preinitsetup $target #bu dosya içindeki fonksiyon
-echo "******************** initsetup ******************"; initsetup $target #bu dosya içindeki fonksiyon
-echo "******************** postinitsetup ******************"; postinitsetup $target #bu dosya içindeki fonksiyon
 
+echo "******************** initsetup ******************"; initsetup $target #bu dosya içindeki fonksiyon
 echo "******************** setup **********************"; setup $target #bpsbuild dosyasından gelen fonksiyon
 echo "******************** build **********************"; build #bpsbuild dosyasından gelen fonksiyon
 echo "******************** package ********************"; package #bpsbuild dosyasından gelen fonksiyon
