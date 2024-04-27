@@ -51,7 +51,7 @@ initsetup()
 		then 
 		mv $director ${name}-${version}; 
 		fi
-		exit
+	
 	fi
 
 	mkdir -p build-${name}-${version}
