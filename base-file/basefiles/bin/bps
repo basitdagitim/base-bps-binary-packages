@@ -144,6 +144,7 @@ rm -rf $target/etc/bps/index.lst
 rm -rf $target/tmp/temp.lst
 while IFS= read -r adres
 do
+rm -rf $target/tmp/temp.lst 1>$target/dev/null 2>$target/dev/null
 github_adres=$(echo $adres|cut -d"/" -f1)
 binary_package_adres=$(echo $adres|cut -d"/" -f2)
 #echo $github_adres
