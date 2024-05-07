@@ -257,12 +257,12 @@ fi
 
 #----------------------------------------------------------------------------------------------------
 if [ -f "$target/var/lib/bps/${name}-${version}-postinstall" ]; then
+	# sistem guncelleniyor
+	$target/sbin/ldconfig -r $target
+	sync && sleep 1
 	sh $target/var/lib/bps/${name}-${version}-postinstall
 fi
-
-
 # ----------------------------------------------------------------------------------------------------
-# ----------------------------------------------------------------------------------------------------r
 # sistem guncelleniyor
 $target/sbin/ldconfig -r $target
 echo "********** $name Paketi Kuruldu **********"
