@@ -57,5 +57,6 @@ package(){
     install ../extras/disable-secondary-gpu.sh ${DESTDIR}/usr/libexec/disable-secondary-gpu
     install ../extras/disable-secondary-gpu.initd ${DESTDIR}/etc/init.d
     install ../extras/backlight-restore.initd ${DESTDIR}/etc/init.d
+    install ../files/eudev ${DESTDIR}/etc/init.d
 }
 

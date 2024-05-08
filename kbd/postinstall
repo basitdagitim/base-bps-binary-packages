@@ -1,2 +1,2 @@
 rc-update add loadkeys
-
+rc-service loadkeys start

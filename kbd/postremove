@@ -1,1 +1,2 @@
-echo ""
+rc-update del loadkeys
+rc-service loadkeys stop
