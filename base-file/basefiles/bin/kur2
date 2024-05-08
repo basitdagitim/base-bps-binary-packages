@@ -52,7 +52,7 @@ echo "********************* kurulum başladı******************************"
 mount -t iso9660 -o loop /dev/sr0 cdrom
 mount -t squashfs -o loop /cdrom/live/filesystem.squashfs /kaynak
 #cp -prfv /kaynak/* /hedef/
-ls /kaynak/ | xargs -n1 -P$(nproc) -I% rsync -ravhHAX --info=progress2 /source/% /hedef/ &>/dev/null|| fallback
+ls /kaynak/ | xargs -n1 -P$(nproc) -I% /usr/bin/rsync -ravhHAX --info=progress2 /source/% /hedef/ &>/dev/null|| fallback
 cp /cdrom/boot/initrd.img /hedef/boot/initrd.img-$(uname -r)
 cp /cdrom/boot/vmlinuz /hedef/boot/vmlinuz-$(uname -r)
 cp /hedef/etc/kernel-config /hedef/boot/config-$(uname -r)
