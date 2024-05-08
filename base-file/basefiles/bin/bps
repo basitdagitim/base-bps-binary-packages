@@ -22,7 +22,8 @@ initsetup()
 		basedosya=$(basename $source)
 		
 		#curl -Lk -o $basedosya ${source}
-		$target/bin/busybox wget -O $basedosya ${source}
+		#$target/bin/busybox wget -O $basedosya ${source}
+		$target/bin/busybox wget --header 'Accept: */*' ${source}
 		# 1>$target/dev/null 2>$target/dev/null
 		dowloadfile=$(ls|head -1)
 		filetype=$(file -b --extension $dowloadfile|cut -d'/' -f1)
