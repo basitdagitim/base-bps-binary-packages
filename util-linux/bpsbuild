@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 name="util-linux"
-version="2.39"
+version="2.40.1"
 description="Various useful Linux utilities"
-source="https://mirrors.edge.kernel.org/pub/linux/utils/util-linux/v${version}/util-linux-${version}.tar.gz"
+source="https://mirrors.edge.kernel.org/pub/linux/utils/util-linux/v${version%.*}/util-linux-${version}.tar.gz"
 depends="libcap-ng,python,eudev"
 group="sys.apps"
 
