@@ -76,6 +76,12 @@ chroot /hedef /etc/init.d/agettyinstall
 chroot /hedef rc-update add loadkeys default
 chroot /hedef rc-update add hostname default
 chroot /hedef rc-update add udhcpc default
+
+chroot /hedef rc-update add elogind default
+chroot /hedef rc-update add dbus default
+chroot /hedef rc-update add polkit default
+chroot /hedef rc-update add eudev default
+
 cp /hedef/etc/skel/.bashrc /hedef/root/
 cp /hedef/etc/skel/.profile /hedef/root/
 rm /hedef/etc/init.d/agettyinstall
