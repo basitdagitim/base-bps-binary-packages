@@ -82,8 +82,12 @@ chroot /hedef rc-update add dbus default
 chroot /hedef rc-update add polkit default
 chroot /hedef rc-update add eudev default
 
+echo "exec startlxde">/hedef/etc/skel/.xinitrc
+
+cp /hedef/etc/skel/.xinitrc /hedef/root/
 cp /hedef/etc/skel/.bashrc /hedef/root/
 cp /hedef/etc/skel/.profile /hedef/root/
+
 rm /hedef/etc/init.d/agettyinstall
 
 #initrd oluşturuluyor.
