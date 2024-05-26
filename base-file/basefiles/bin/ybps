@@ -302,27 +302,28 @@ do_remove()
 {
 target="$2"
 
-if [ "$paket" == "base-file" ]; then echo "${CHYAN} ${paket} Paketi Sistemin Temel Paketidir. Silinemez. ${NC}"; return; fi
-if [ "$paket" == "glibc" ]; then echo "${CHYAN} ${paket} Paketi Sistemin Temel Paketidir. Silinemez. ${NC}"; return; fi
-if [ "$paket" == "readline" ]; then echo "${CHYAN} ${paket} Paketi Sistemin Temel Paketidir. Silinemez. ${NC}"; return; fi
-if [ "$paket" == "ncurses" ]; then echo "${CHYAN} ${paket} Paketi Sistemin Temel Paketidir. Silinemez. ${NC}"; return; fi
 
-#------------------------------------------------------------------
-IFS='|' read -r -a array <<< $(bps_find_package_detail $paket $target)
-name=${array[0]}
-version=${array[1]}
-depends=${array[2]}
-filepath=${array[3]}
-address=${array[4]}
-if [ ! -f "$target/var/lib/bps/${name}-${version}.lst" ]; then echo "${BLUE} ${name}-${version}  Paketi Kurulu Değil ${NC}"; return; fi
-echo "Bağımlılıkları: $depends"
-
-#-------------------------------------------------------------------
-
-while IFS= read -r item
+while IFS= read -r paket
 do
+	if [ "$paket" == "base-file" ]; then echo "${CHYAN} ${paket} Paketi Sistemin Temel Paketidir. Silinemez. ${NC}"; return; fi
+	if [ "$paket" == "glibc" ]; then echo "${CHYAN} ${paket} Paketi Sistemin Temel Paketidir. Silinemez. ${NC}"; return; fi
+	if [ "$paket" == "readline" ]; then echo "${CHYAN} ${paket} Paketi Sistemin Temel Paketidir. Silinemez. ${NC}"; return; fi
+	if [ "$paket" == "ncurses" ]; then echo "${CHYAN} ${paket} Paketi Sistemin Temel Paketidir. Silinemez. ${NC}"; return; fi
+
+	#------------------------------------------------------------------
+	IFS='|' read -r -a array <<< $(bps_find_package_detail $paket $target)
+	name=${array[0]}
+	version=${array[1]}
+	depends=${array[2]}
+	filepath=${array[3]}
+	address=${array[4]}
+	if [ ! -f "$target/var/lib/bps/${name}-${version}.lst" ]; then echo "${BLUE} ${name}-${version}  Paketi Kurulu Değil ${NC}"; return; fi
+	echo "Bağımlılıkları: $depends"
+
+	#-------------------------------------------------------------------
+
 	#echo "Silinecek paket $item" "$target"
-	 package_remove "$item" "$target"
+	 package_remove "$paket" "$target"
 	
 done < $1
 }
