@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+name="locale-tr"
+version="1.0"
+description="loacale türkçeleştirme ayarı"
+source=""
+depends="glibc"
+group="sys.apps"
+
+
+setup(){
+	echo ""
+}
+
+build(){
+	echo ""
+}
+
+package(){
+mkdir -p ${DESTDIR}/etc
+mkdir -p ${DESTDIR}/etc/profile.d
+    cp -prfv $PACKAGEDIR/files/locale.sh  ${DESTDIR}/etc/profile.d/locale.sh
+    cp -prfv $PACKAGEDIR/files/profile  ${DESTDIR}/etc/profile
+}
+
