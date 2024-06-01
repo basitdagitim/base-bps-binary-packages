@@ -3,7 +3,7 @@ name="locale-tr"
 version="1.0"
 description="loacale türkçeleştirme ayarı"
 source=""
-depends="glibc"
+depends="glibc,tzdata"
 group="sys.apps"
 
 

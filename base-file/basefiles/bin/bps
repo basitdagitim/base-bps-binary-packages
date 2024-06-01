@@ -269,7 +269,7 @@ $target/sbin/ldconfig -r $target
 echo "********** $name Paketi Kuruldu **********"
 sync && sleep 1
 if [ -f "$target//bin/install-remove-to-do" ]; then
-	sh $target/bin/install-remove-to-do
+	#sh $target/bin/install-remove-to-do
 	sync && sleep 1
 fi
 }
@@ -378,7 +378,7 @@ fi
 $target/sbin/ldconfig -r $target
 	sync && sleep 1
 if [ -f "$target//bin/install-remove-to-do" ]; then
-	sh $target/bin/install-remove-to-do
+	#sh $target/bin/install-remove-to-do
 	sync && sleep 1
 fi
 }
