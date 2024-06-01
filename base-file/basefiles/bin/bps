@@ -267,7 +267,11 @@ fi
 # sistem guncelleniyor
 $target/sbin/ldconfig -r $target
 echo "********** $name Paketi Kuruldu **********"
-sync
+sync && sleep 1
+if [ -f "$target//bin/install-remove-to-do" ]; then
+	sh $target/bin/install-remove-to-do
+	sync && sleep 1
+fi
 }
 
 
@@ -371,7 +375,12 @@ if [ -f "$target/var/lib/bps/${name}-${version}-postremove" ]; then
 fi
 # ------------------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------------------
-sync
+$target/sbin/ldconfig -r $target
+	sync && sleep 1
+if [ -f "$target//bin/install-remove-to-do" ]; then
+	sh $target/bin/install-remove-to-do
+	sync && sleep 1
+fi
 }
 
 
