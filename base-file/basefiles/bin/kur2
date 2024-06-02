@@ -74,8 +74,8 @@ chroot /hedef /bin/busybox --install -s /bin
 #**********servisler ekleniyor*************
 chroot /hedef /etc/init.d/agettyinstall
 #chroot /hedef rc-update add loadkeys default
-chroot /hedef rc-update add hostname default
-chroot /hedef rc-update add udhcpc default
+#chroot /hedef rc-update add hostname default
+#chroot /hedef rc-update add udhcpc default
 
 #chroot /hedef rc-update add elogind default
 #chroot /hedef rc-update add dbus default
