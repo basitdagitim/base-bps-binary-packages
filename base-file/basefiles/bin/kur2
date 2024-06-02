@@ -104,7 +104,12 @@ echo "boot">>/hedef/boot/grub/grub.cfg
 
 chroot /hedef adduser -D -s /bin/sh by -h /home/by
 chroot /hedef echo -e "1\n1\n"|chroot /hedef passwd by
+for grp in tty wheel cdrom floppy audio dip video plugdev netdev bluetooth lpadmin scanner ; do
+    chroot /hedef usermod -aG $grp by || true
+done
+
 chroot /hedef echo -e "1\n1\n"|chroot /hedef passwd root
+
 #umount -f -R /hedef/dev
 #umount -f -R /hedef/sys
 #umount -f -R /hedef/proc
