@@ -5,6 +5,4 @@
     done
     touch /etc/fstab
     
-rc-update add eudev default
-rc-update add hostname default
-#rc-update add udhcpc default
+

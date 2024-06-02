@@ -79,6 +79,10 @@ chroot /hedef /etc/init.d/agettyinstall
 #chroot /hedef rc-update add elogind default
 #chroot /hedef rc-update add dbus default
 #chroot /hedef rc-update add polkit default
+rc-update add eudev default
+rc-update add hostname default
+#rc-update add udhcpc default
+
 
 cp /hedef/etc/skel/.xinitrc /hedef/root/
 cp /hedef/etc/skel/.bashrc /hedef/root/
@@ -102,11 +106,13 @@ echo "boot">>/hedef/boot/grub/grub.cfg
 
 chroot /hedef adduser -D -s /bin/sh by -h /home/by
 chroot /hedef echo -e "1\n1\n"|chroot /hedef passwd by
+
 for grp in tty wheel cdrom audio dip video plugdev netdev; do
     chroot /hedef usermod -aG $grp by || true
 done
 
 chroot /hedef echo -e "1\n1\n"|chroot /hedef passwd root
+chroot /hedef mv /bin/su /bin/su-old
 
 #umount -f -R /hedef/dev
 #umount -f -R /hedef/sys
