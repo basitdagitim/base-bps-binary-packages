@@ -4,7 +4,7 @@ if [ ! -f "/etc/passwd" ]; then
 	echo -e "root:x:0:0:root:/root:/bin/sh">/etc/passwd
 fi
 if [ ! -f "/etc/group" ]; then
-cat > /target/etc/default/console-setup << EOF
+cat > /etc/group << EOF
 root:x:0:
 daemon:x:1:
 bin:x:2:
@@ -60,6 +60,8 @@ pulse-access:x:114:
 scanner:x:117:
 saned:x:118:
 avahi:x:119:
+wheel:x:120:
+
 EOF
 
 fi
