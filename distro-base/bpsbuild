@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+name="distro-base"
+version="1.0.0"
+description="base system"
+source=""
+depends="grsync,kbd,libpcre2,busybox,linux-image,linux-headers,linux-libc-dev,libc6-dev,libstdc++-dev,live-boot,live-config,parted,dosfstools,kmod,grub,zstd,brotli expat,libmd,eudev,findutils,pam,e2fsprogs,\gzip,\gawk,initramfs-tools,zlib,audit,xz-utils,libxml2,libselinux,nano"
+group="sys.base"
+
+setup(){
+	echo ""
+}
+
+build(){
+   echo ""
+}
+
+package(){
+mkdir -p $DESTDIR/tmp
+touch $DESTDIR/tmp/distro-base
+ 
+}
+
+
+

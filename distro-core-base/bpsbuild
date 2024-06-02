@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+name="distro-core-base"
+version="1.0.0"
+description="base core system"
+source=""
+depends="glibc,readline,ncurses,\bash,openssl,acl,attr,libcap,gmp,\grep,\sed,libpcre2,coreutils,util-linux,openrc"
+group="sys.base"
+
+setup(){
+	echo ""
+}
+
+build(){
+   echo ""
+}
+
+package(){
+mkdir -p $DESTDIR/tmp
+touch $DESTDIR/tmp/distro-core-base
+ 
+}
+
+
+
