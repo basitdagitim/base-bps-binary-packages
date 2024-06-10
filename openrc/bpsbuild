@@ -59,8 +59,7 @@ package(){
     install ../extras/disable-secondary-gpu.initd ${DESTDIR}/etc/init.d
     install ../extras/backlight-restore.initd ${DESTDIR}/etc/init.d
     install ../files/eudev.init.d ${DESTDIR}/etc/init.d/eudev
-    install ../files/xxrunsystemd.init.d ${DESTDIR}/etc/init.d/xxrunsystemd
-    install ../files/runsystemd.local.d ${DESTDIR}/etc/local.d/runsystemd
+
     
 }
 
