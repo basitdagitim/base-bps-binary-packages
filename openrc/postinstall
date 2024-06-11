@@ -5,4 +5,5 @@
     done
     touch /etc/fstab
     
-
+sleep 2
+rc-update add eudev default
