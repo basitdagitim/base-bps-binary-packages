@@ -1,9 +1,8 @@
 #!/bin/bash
 
-    for level in boot default nonetwork shutdown sysinit ; do
-        mkdir -p /etc/runlevels/$level
-    done
-    touch /etc/fstab
-    
-sleep 2
-rc-update add eudev default
+sed -i "/uucp/d" /etc/group
+echo -e "\nuucp:x:14:" >> /etc/group
+
+sed -i "/uucp/d" /etc/passwd
+echo -e "\nuucp:x:10:14:uucp:/var/spool/uucp:/bin/false" >> /etc/passwd
+

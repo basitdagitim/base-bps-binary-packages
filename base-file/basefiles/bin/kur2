@@ -72,15 +72,15 @@ mount --bind /tmp /hedef/tmp
 chroot /hedef /bin/busybox --install -s /bin
 
 #**********servisler ekleniyor*************
-chroot /hedef /etc/init.d/agettyinstall
+##chroot /hedef /etc/init.d/agettyinstall
 #chroot /hedef rc-update add loadkeys default
 
 
 #chroot /hedef rc-update add elogind default
 #chroot /hedef rc-update add dbus default
 #chroot /hedef rc-update add polkit default
-rc-update add eudev default
-rc-update add hostname default
+##rc-update add eudev default
+##rc-update add hostname default
 #rc-update add udhcpc default
 
 
@@ -88,7 +88,7 @@ cp /hedef/etc/skel/.xinitrc /hedef/root/
 cp /hedef/etc/skel/.bashrc /hedef/root/
 cp /hedef/etc/skel/.profile /hedef/root/
 
-rm /hedef/etc/init.d/agettyinstall
+##rm /hedef/etc/init.d/agettyinstall
 
 #initrd oluşturuluyor.
 chroot /hedef /usr/sbin/update-initramfs -u -k $(uname -r)

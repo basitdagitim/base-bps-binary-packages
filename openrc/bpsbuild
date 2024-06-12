@@ -16,13 +16,14 @@ setup(){
         --sysconfdir=/etc \
         --prefix=/ \
         --libdir=/lib \
+        --includedir=/usr/include \
         -Ddefault_library=both \
         -Dzsh-completions=true \
         -Dbash-completions=true \
         -Dpam=true \
 	-Dselinux=disabled \
         -Dpkgconfig=true
-#                -Dpam=true \
+
 }
 
 build(){
@@ -42,10 +43,7 @@ package(){
     # install sysconf script
     mkdir -p ${DESTDIR}/etc/sysconf.d/
     install ../files/openrc.sysconf ${DESTDIR}/etc/sysconf.d/openrc
-    mkdir -p ${DESTDIR}/etc/group.d
-    mkdir -p ${DESTDIR}/etc/passwd.d
-    echo "uucp:x:14:" > ${DESTDIR}/etc/group.d/uucp
-    echo "uucp:x:10:14:uucp:/var/spool/uucp:/bin/false" > ${DESTDIR}/etc/passwd.d/uucp
+
     # move /share to /usr/share
     mkdir -p ${DESTDIR}/usr ${DESTDIR}/sbin
     mv ${DESTDIR}/{,usr}/share
@@ -58,8 +56,19 @@ package(){
     install ../extras/disable-secondary-gpu.sh ${DESTDIR}/usr/libexec/disable-secondary-gpu
     install ../extras/disable-secondary-gpu.initd ${DESTDIR}/etc/init.d
     install ../extras/backlight-restore.initd ${DESTDIR}/etc/init.d
-    install ../files/eudev.init.d ${DESTDIR}/etc/init.d/eudev
-
+    install ../files/0modules.init.d ${DESTDIR}/etc/init.d/0modules
+    
+    for level in boot default nonetwork shutdown sysinit ; do
+    mkdir -p ${DESTDIR}/etc/runlevels/$level
+    done
+    touch ${DESTDIR}/etc/fstab
+    install ../files/0modules.init.d ${DESTDIR}/etc/init.d/0modules
+    install ../files/0modules.init.d ${DESTDIR}/etc/runlevels/default/0modules
+    
+    install ${DESTDIR}/etc/init.d/hostname ${DESTDIR}/etc/runlevels/default/hostname
+    cd ${DESTDIR}/etc/init.d/
+    ln -s agetty agetty.tty1
+    install ${DESTDIR}/etc/init.d/agetty.tty1 ${DESTDIR}/etc/runlevels/default/agetty.tty1
     
 }
 
