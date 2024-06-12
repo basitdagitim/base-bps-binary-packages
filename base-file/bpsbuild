@@ -17,6 +17,7 @@ package()
 {
 
 	cp -prfv $PACKAGEDIR/basefiles/*  ${DESTDIR}/
+	install -d -m 1777 ${DESTDIR}/tmp
 }
 
 
