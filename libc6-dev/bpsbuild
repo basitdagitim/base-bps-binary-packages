@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-version="2.38-6"
+version="2.39-3.1"
 name="libc6-dev"
 depends=""
 description="temel dağıtım kernel dosyası ve moduller"
@@ -10,7 +10,7 @@ setup()
 	echo ""
 	# deb dosyası indirilir http://ftp.tr.debian.org/debian/pool/main/g/glibc/libc6-dev_2.38-5_amd64.deb
 	#cd $SOURCEDIR
-	wget -O libc.deb http://ftp.tr.debian.org/debian/pool/main/g/glibc/libc6-dev_2.38-6_amd64.deb
+	wget -O libc.deb http://ftp.tr.debian.org/debian/pool/main/g/glibc/libc6-dev_2.39-3.1_amd64.deb
 	# ar x indirilen dosya
 	ar x libc.deb
 	# tar -xf data.tar.xz

@@ -7,9 +7,9 @@ source="ftp://ftp.gnu.org/gnu/grub/${name}-${version}.tar.gz"
 groups="sys.boot"
 setup()
 {
-	../${name}-${version}/configure --prefix= \
+	../${name}-${version}/configure --prefix=/usr \
             --sysconfdir=/etc \
-            --libdir=/lib/ \
+            --libdir=/usr/lib64/ \
             --disable-werror 
 
 }
