@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-version="13.2.0-13"
+version="13.2.0-25"
 name="libstdc++-dev"
 depends=""
 description="temel dağıtım kernel dosyası ve moduller"
@@ -10,7 +10,7 @@ setup()
 	echo ""
 	# deb dosyası indirilirhttp://ftp.tr.debian.org/debian/pool/main/g/gcc-13/
 	cd $SOURCEDIR
-	wget -O image.deb http://ftp.tr.debian.org/debian/pool/main/g/gcc-13/libstdc%2B%2B-13-dev_13.2.0-13_amd64.deb
+	wget -O image.deb http://ftp.tr.debian.org/debian/pool/main/g/gcc-13/libstdc%2B%2B-13-dev_13.2.0-25_amd64.deb
 	# ar x indirilen dosya
 	ar x image.deb
 	# tar -xf data.tar.xz
@@ -27,7 +27,8 @@ build()
 package()
 {
 	cd $BUILDDIR
-	cp -prfv usr/include  ${DESTDIR}/
+	mkdir -p ${DESTDIR}/usr
+	cp -prfv usr/include  ${DESTDIR}/usr/
 }
 
 

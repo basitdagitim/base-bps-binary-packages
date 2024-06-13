@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-version="6.7.9"
+version="6.8.12"
 name="linux-libc-dev"
 depends=""
 description="temel dağıtım kernel dosyası ve moduller"
@@ -10,7 +10,7 @@ setup()
 	echo ""
 	# deb dosyası indirilir http://ftp.tr.debian.org/debian/pool/main/l/linux/
 	cd $SOURCEDIR
-	wget -O image.deb http://ftp.tr.debian.org/debian/pool/main/l/linux/linux-libc-dev_6.7.9-2_all.deb
+	wget -O image.deb http://ftp.tr.debian.org/debian/pool/main/l/linux/linux-libc-dev_6.8.12-1_all.deb
 	# ar x indirilen dosya
 	ar x image.deb
 	# tar -xf data.tar.xz
