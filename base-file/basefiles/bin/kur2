@@ -104,14 +104,14 @@ echo "boot">>/hedef/boot/grub/grub.cfg
 #echo root:x:0:0:root:/root:/bin/sh > /hedef/etc/passwd 
 #chroot /hedef chmod 755 /etc/passwd
 
-chroot /hedef adduser -D -s /bin/sh by -h /home/by
+chroot /hedef useradd by -m -s /bin/sh  -d /home/by
 chroot /hedef echo -e "1\n1\n"|chroot /hedef passwd by
 
-for grp in tty wheel cdrom audio dip video plugdev netdev; do
+for grp in users tty wheel cdrom audio dip video plugdev netdev; do
     chroot /hedef usermod -aG $grp by || true
 done
-
-chroot /hedef echo -e "1\n1\n"|chroot /hedef passwd root
+chroot /hedef userdel -r live
+#chroot /hedef echo -e "1\n1\n"|chroot /hedef passwd root
 chroot /hedef mv /bin/su /bin/su-old
 
 #umount -f -R /hedef/dev
