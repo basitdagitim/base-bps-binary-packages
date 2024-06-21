@@ -113,7 +113,7 @@ done
 chroot /hedef userdel -r live
 #chroot /hedef echo -e "1\n1\n"|chroot /hedef passwd root
 chroot /hedef mv /bin/su /bin/su-old
-chroot /hedef /bin/bps -r 17g
+chroot /hedef /bin/bps -r live-installer
 #umount -f -R /hedef/dev
 #umount -f -R /hedef/sys
 #umount -f -R /hedef/proc
