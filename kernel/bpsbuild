@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+name="kernel"
+version="6.8.12"
+description="Linux kernel"
+source=""
+depends=""
+builddepend="bc,cpio,gettext,elfutils,pahole,perl,python,tar,xz-utils"
+group="sys.kernel"
+
+setup(){
+cd $SOURCEDIR
+mkdir -p $SOURCEDIR/boot
+	cp -prvf $PACKAGEDIR/boot $SOURCEDIR/
+	cp -prvf $PACKAGEDIR/lib $SOURCEDIR
+	cp -prvf $PACKAGEDIR/include $SOURCEDIR
+}
+build(){
+    echo ""
+}
+
+package(){
+	mkdir -p ${DESTDIR}/usr
+	cp -prfv $SOURCEDIR/boot  ${DESTDIR}/
+	cp -prfv $SOURCEDIR/lib  ${DESTDIR}/
+	cp -prfv $SOURCEDIR/include  ${DESTDIR}/usr/
+	find ${DESTDIR}/ -iname "*" -exec unxz {} \;
+}
