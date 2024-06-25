@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-name="kernel"
+name="oldkrnl"
 version="6.8.12"
 description="Linux kernel"
 source=""
