@@ -16,7 +16,7 @@ if [[ ! -f /tmp/.ctty ]] ; then
     /bin/busybox cttyhack /sbin/init
 fi
 
-kur1()
+select_disk_install()
 {
 
 DISK=$1
@@ -48,22 +48,23 @@ mkdir -p hedef
 mkdir -p kaynak
 mkdir -p cdrom
 
-echo "*********************disk bölümleri silindi ******************************"
+echo "*********************disk bölümleri silindi ******************************${DISK}"
     
-  dd if=/dev/zero of=/dev/${DISK} bs=512 count=1
+    
+  dd if=/dev/zero of=${DISK} bs=512 count=1
     sync && sleep 1
 
-        yes | parted /dev/${DISK} mktable msdos || fallback
-        yes | parted /dev/${DISK} mkpart primary fat32 1 "100%" || fallback
+        yes | parted ${DISK} mktable msdos || fallback
+        yes | parted ${DISK} mkpart primary fat32 1 "100%" || fallback
         sync && sleep 1
-         yes |e2fsck -f /dev/${DISKX}1
+         yes |e2fsck -f ${DISKX}1
          sync && sleep 1
-	yes |tune2fs -O ^metadata_csum /dev/${DISKX}1
+	yes |tune2fs -O ^metadata_csum ${DISKX}1
 	 sync && sleep 1
-        yes | mkfs.ext4  /dev/${DISKX}1 || fallback
-        yes | parted /dev/${DISK} set 1 esp on || fallback
+        yes | mkfs.ext4  ${DISKX}1 || fallback
+        yes | parted ${DISK} set 1 esp on || fallback
         sync && sleep 1
-        mount /dev/${DISKX}1  /hedef || fallback
+        mount ${DISKX}1  /hedef || fallback
         mkdir -p /hedef/boot 
 echo "********************* kurulum başladı******************************"
 
@@ -95,10 +96,10 @@ rm /hedef/etc/init.d/agettyinstall
 
 chroot /hedef /usr/sbin/update-initramfs -u -k $(uname -r)
 
-chroot /hedef grub-install --boot-directory=/boot /dev/${DISK} --target=i386-pc
+chroot /hedef grub-install --boot-directory=/boot ${DISK} --target=i386-pc
 
 mkdir -p /hedef/boot/grub
-bid=$(blkid /dev/${DISKX}1|cut -d' ' -f2|cut -c 7-42)
+bid=$(blkid ${DISKX}1|cut -d' ' -f2|cut -c 7-42)
 rm -rf /hedef/boot/grub/grub.cfg
 touch /hedef/boot/grub/grub.cfg
 echo "linux /boot/vmlinuz-$(uname -r) init=/sbin/openrc-init root=UUID=${bid} rw quiet">>/hedef/boot/grub/grub.cfg
@@ -324,7 +325,7 @@ auto_install_menu(){
        auto_disk=/dev/$(TITLE="Select a disk for installation" select_disk)
        setup_grub=${auto_disk}
        #auto_install_main
-       kur1 ${auto_disk}
+       select_disk_install ${auto_disk}
     done
 }
 
