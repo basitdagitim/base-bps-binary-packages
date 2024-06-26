@@ -496,10 +496,10 @@ if [[ $$ -eq 1 ]] ; then
     udevadm settle
 fi
 
-while true ; do
-    if grep "boot=live" "/proc/cmdline"; then
-        main_menu || create_shell
-    else
+#while true ; do
+   # if grep "boot=live" "/proc/cmdline"; then
+     #   main_menu || create_shell
+    #else
    	 echo "*********************eudev çalıştırıldı ******************************"
 	/bin/udv
 	echo "*********************ek modüller yüklendi ******************************"
@@ -507,8 +507,8 @@ while true ; do
 	modprobe ext4
     	main_menu || create_shell
         #first_setup || create_shell
-    fi
-done
+   # fi
+#done
 
 
 
