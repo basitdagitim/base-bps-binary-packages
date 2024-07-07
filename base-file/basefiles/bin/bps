@@ -29,17 +29,17 @@ initsetup()
 		filetype=$(file -b --extension $dowloadfile|cut -d'/' -f1)
 		
 		echo "***********dosya sıkıştırma türü**********:${filetype}"
-		if [ ${filetype} == "bz2" ]; then tar -xvf ${dowloadfile}; fi
-		if [ ${filetype} == "tar" ]; then tar -xvf ${dowloadfile}; fi
-		if [ ${filetype} == "xz" ]; then tar -xvf ${dowloadfile}; fi
+		if [ ${filetype} == "bz2" ]; then $target/bin/busybox tar -xvf ${dowloadfile}; fi
+		if [ ${filetype} == "tar" ]; then $target/bin/busybox tar -xvf ${dowloadfile}; fi
+		if [ ${filetype} == "xz" ]; then $target/bin/busybox tar -xvf ${dowloadfile}; fi
 		if [ "${filetype}" == "gz" ]; 
 			then echo "*****dosya gz ile sıkıştırılmış**"; 
 			mkdir -p tmpdir; 
-			tar -xvf ${dowloadfile} -C tmpdir;
+			$target/bin/busybox tar -xvf ${dowloadfile} -C tmpdir;
 			if [ "$(ls tmpdir/|wc -l)" == "1" ];
 			then
 				rm -rf tmpdir/
-				tar -xvf ${dowloadfile};
+				$target/bin/busybox tar -xvf ${dowloadfile};
 			fi
 			
 			
@@ -88,7 +88,7 @@ packagecompress()
 {
 target="";if [ -n "$1}" ];then target="$1"; else target="/";fi
 cd $target/tmp/bps/build/rootfs-${name}-${version}
-tar -cf ../rootfs.tar ./*
+$target/bin/busybox tar -cf ../rootfs.tar ./*
 cd $target/tmp/bps/build/
 xz -9 rootfs.tar
 #------------------------------------------postinstall-----------------------------------------------
@@ -98,7 +98,7 @@ fi
 if [ ! -f "postremove" ]; then
 	echo "echo ''">postremove
 fi
-tar -cvzf paket-${name}-${version}.tar.gz rootfs.tar.xz file.index bpsbuild postinstall postremove
+$target/bin/busybox tar -cvzf paket-${name}-${version}.tar.gz rootfs.tar.xz file.index bpsbuild postinstall postremove
 cp paket-${name}-${version}.tar.gz ${dizin}/${paket}/${name}-${version}.bps
 }
 
