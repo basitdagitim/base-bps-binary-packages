@@ -3,12 +3,11 @@ name="grub"
 version="2.12"
 description="GNU GRand Unified Bootloader"
 source="https://ftp.gnu.org/gnu/grub/grub-$version.tar.xz"
-depends="glibc,readline,ncurses,efibootmgr"
+depends="glibc,readline,ncurses,xz-utils,efibootmgr"
 builddepend="rsync,freetype,ttf-dejavu"
 group="sys.boot"
 uses=(efi bios)
 uses_extra=(ia32)
-arch=('x86_64')
 dontstrip=1
 efi_dp=(efibootmgr)
 ia32_dp=(efibootmgr)
@@ -86,4 +85,5 @@ package(){
     } > $DESTDIR/etc/default/grub
     echo "#!/bin/sh" > $DESTDIR/usr/bin/update-grub
     echo "grub-mkconfig -o /boot/grub/grub.cfg" >> $DESTDIR/usr/bin/update-grub
+    chmod 755 $DESTDIR/usr/bin/update-grub
 }
