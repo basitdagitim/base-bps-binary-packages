@@ -3,13 +3,15 @@ name="grub"
 version="2.12"
 description="GNU GRand Unified Bootloader"
 source="https://ftp.gnu.org/gnu/grub/grub-$version.tar.xz"
+depends="glibc,readline,ncurses,efibootmgr"
+builddepend="rsync,freetype,ttf-dejavu"
 group="sys.boot"
 uses=(efi bios)
 uses_extra=(ia32)
 arch=('x86_64')
 dontstrip=1
-efi_depends=(efibootmgr)
-ia32_depends=(efibootmgr)
+efi_dp=(efibootmgr)
+ia32_dp=(efibootmgr)
 
 unset CFLAGS
 unset CXXFLAGS
