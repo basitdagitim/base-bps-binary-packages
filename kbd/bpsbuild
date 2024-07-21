@@ -3,8 +3,8 @@ name="kbd"
 version="2.6.4"
 description="Keytable files and keyboard utilities"
 source="https://www.kernel.org/pub/linux/utils/kbd/kbd-${version}.tar.gz"
-depends="autoconf,automake,linux-headers"
-makedepend="flex"
+depends="pam"
+makedepend="flex,autoconf,automake"
 group="sys.apps"
 
 
