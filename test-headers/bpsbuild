@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+name="test-headers"
+version="6.9.9"
+description="Linux kernel headers"
+source="https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-$version.tar.xz"
+depends=""
+builddepend="rsync,bc,cpio,gettext,elfutils,pahole,perl,python,tar,xz-utils"
+group="sys.kernel"
+
+setup(){
+
+	cp -prvf $PACKAGEDIR/files/ /tmp/bps/build/
+	cd $SOURCEDIR
+	
+	patch -Np1 -i ../files/patch-$version
+	cp ../files/config .config
+	make olddefconfig
+
+}
+
+build(){
+echo ""
+}
+
+package(){
+
+	# install libc headers
+	mkdir -p "$DESTDIR/usr/include/linux"
+	cp -v -t "$DESTDIR/usr/include/" -a include/linux/
+	cp -v -t "$DESTDIR/usr/" -a tools/include
+	
+	make headers_install INSTALL_HDR_PATH=$DESTDIR/usr
+
+}
