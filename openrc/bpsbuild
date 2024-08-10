@@ -69,6 +69,7 @@ package(){
     cd ${DESTDIR}/etc/init.d/
     ln -s agetty agetty.tty1
     install ${DESTDIR}/etc/init.d/agetty.tty1 ${DESTDIR}/etc/runlevels/default/agetty.tty1
+    mv  ${DESTDIR}/lib  ${DESTDIR}/lib64
     
 }
 
