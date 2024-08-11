@@ -20,6 +20,7 @@ package()
 {
 	cd $SOURCEDIR
 	make install DESTDIR=$DESTDIR
+	#mv  ${DESTDIR}/lib  ${DESTDIR}/lib64
 }
 
 
