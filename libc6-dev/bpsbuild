@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 version="2.38-6"
-name="libc6-dev"
+name="debian-libc6-dev"
 depends=""
 description="temel dağıtım kernel dosyası ve moduller"
 source=""

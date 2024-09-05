@@ -8,9 +8,9 @@ buildepend="libcap-ng,python,eudev,sqlite,eudev,cryptsetup,libxcrypt"
 group="sys.apps"
 
 setup(){
-	cp -prvf $PACKAGEDIR/files/ /tmp/bps/build/
+	cp -prvf $PACKAGEDIR/files $BUILDDIR/
 	cd $SOURCEDIR
-	patch -Np1 -i ../files/0001-util-linux-tmpfiles.patch
+	patch -Np1 -i $BUILDDIR/files/0001-util-linux-tmpfiles.patch
    
 	./configure --prefix=/usr \
 		--libdir=/usr/lib64 \
@@ -40,42 +40,42 @@ build(){
 
 package(){
 	_python_stdlib="$(python -c 'import sysconfig; print(sysconfig.get_paths()["stdlib"])')"
-    make install DESTDIR=$DESTDIR
+    make install DESTDIR=$BUILDDIR/temp
     
 	# remove static libraries
-	rm "${DESTDIR}"/usr/lib/lib*.a*
+	rm $BUILDDIR/temp/usr/lib/lib*.a*
 
 	# setuid chfn and chsh
-	chmod 4755 "${DESTDIR}"/usr/bin/{newgrp,ch{sh,fn}}
+	chmod 4755 "$BUILDDIR/temp"/usr/bin/{newgrp,ch{sh,fn}}
 
 	# install PAM files for login-utils
-	install -Dm0644 ../files/pam-common "${DESTDIR}/etc/pam.d/chfn"
-	install -m0644 ../files/pam-common "${DESTDIR}/etc/pam.d/chsh"
-	install -m0644 ../files/pam-login "${DESTDIR}/etc/pam.d/login"
-	install -m0644 ../files/pam-remote "${DESTDIR}/etc/pam.d/remote"
-	install -m0644 ../files/pam-runuser "${DESTDIR}/etc/pam.d/runuser"
-	install -m0644 ../files/pam-runuser "${DESTDIR}/etc/pam.d/runuser-l"
-	install -m0644 ../files/pam-su "${DESTDIR}/etc/pam.d/su"
-	install -m0644 ../files/pam-su "${DESTDIR}/etc/pam.d/su-l"
+	install -Dm0644 $BUILDDIR/files/pam-common "$BUILDDIR/temp/etc/pam.d/chfn"
+	install -m0644 $BUILDDIR//files/pam-common "$BUILDDIR/temp/etc/pam.d/chsh"
+	install -m0644 $BUILDDIR/files/pam-login "$BUILDDIR/temp/etc/pam.d/login"
+	install -m0644 $BUILDDIR/files/pam-remote "$BUILDDIR/temp/etc/pam.d/remote"
+	install -m0644 $BUILDDIR/files/pam-runuser "$BUILDDIR/temp/etc/pam.d/runuser"
+	install -m0644 $BUILDDIR/files/pam-runuser "$BUILDDIR/temp/etc/pam.d/runuser-l"
+	install -m0644 $BUILDDIR/files/pam-su "$BUILDDIR/temp/etc/pam.d/su"
+	install -m0644 .$BUILDDIR/files/pam-su "$BUILDDIR/temp/etc/pam.d/su-l"
 
-	mkdir -p $DESTDIR/usr/lib64/python3.11
+	mkdir -p $BUILDDIR/temp/usr/lib64/python3.11
 
 	# runtime libs are shipped as part of util-linux-libs
-	install -d -m0755 util-linux-libs/lib/
-	mv "$DESTDIR"/usr/lib/lib*.so* util-linux-libs/lib64/
-	mv "$DESTDIR"/usr/lib/pkgconfig util-linux-libs/lib64/pkgconfig
-	mv "$DESTDIR"/usr/include util-linux-libs/include
-	mv "$DESTDIR"/"${_python_stdlib}"/site-packages util-linux-libs/site-packages
-	rmdir "$DESTDIR"/"${_python_stdlib}"
-	mv "$DESTDIR"/usr/share/man/man3 util-linux-libs/man3
+	install -d -m0755 $BUILDDIR/util-linux-libs/lib/
+	mv "$BUILDDIR/temp"/usr/lib/lib*.so* $BUILDDIR/util-linux-libs/lib64/
+	mv "$BUILDDIR/temp"/usr/lib/pkgconfig $BUILDDIR/util-linux-libs/lib64/pkgconfig
+	mv "$BUILDDIR/temp"/usr/include $BUILDDIR/util-linux-libs/include
+	mv "$BUILDDIR/temp"/"${_python_stdlib}"/site-packages $BUILDDIR/util-linux-libs/site-packages
+	rmdir "$BUILDDIR/temp"/"${_python_stdlib}"
+	mv "$BUILDDIR/temp"/usr/share/man/man3 $BUILDDIR/util-linux-libs/man3
 
-	mv util-linux-libs/lib/* "$DESTDIR"/usr/lib64/
-	mv util-linux-libs/include "$DESTDIR"/usr/include
-	mv util-linux-libs/site-packages "$DESTDIR"/"${_python_stdlib}"/site-packages
+	mv $BUILDDIR/util-linux-libs/lib/* "$DESTDIR"/usr/lib64/
+	mv $BUILDDIR/util-linux-libs/include "$DESTDIR"/usr/include
+	mv $BUILDDIR/util-linux-libs/site-packages "$DESTDIR"/"${_python_stdlib}"/site-packages
 
 	# install esysusers
-	install -Dm0644 ../files/util-linux.sysusers "${DESTDIR}/usr/lib64/sysusers.d/util-linux.conf"
+	install -Dm0644 $BUILDDIR/files/util-linux.sysusers "${DESTDIR}/usr/lib64/sysusers.d/util-linux.conf"
 
-	install -Dm0644 ../files/60-rfkill.rules "${DESTDIR}/usr/lib64/udev/rules.d/60-rfkill.rules"
+	install -Dm0644 $BUILDDIR/files/60-rfkill.rules "${DESTDIR}/usr/lib64/udev/rules.d/60-rfkill.rules"
 }
 

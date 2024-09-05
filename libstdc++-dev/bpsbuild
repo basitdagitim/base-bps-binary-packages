@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 version="13.2.0-25"
-name="libstdc++-dev"
+name="debian-libstdc++-dev"
 depends=""
 description="temel dağıtım kernel dosyası ve moduller"
 source=""

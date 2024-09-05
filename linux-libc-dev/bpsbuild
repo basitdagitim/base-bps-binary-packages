@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 version="6.8.12"
-name="linux-libc-dev"
+name="debian-linux-libc-dev"
 depends=""
 description="temel dağıtım kernel dosyası ve moduller"
 source=""
